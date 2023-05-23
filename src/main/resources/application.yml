@@ -1,18 +1,27 @@
 spring:
   datasource:
-    url: jdbc:mysql://containers-us-west-92.railway.app:6494/railway #ver como formar esse path sem pegar no database
-    username: root
-    password: jL7Q37aj8MqqiQSq6NoJ #trocar por variavel de ambiente
+    url: ${DB_URL}
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
     driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
-    show-sql: true
+    #show-sql: true
     properties:
       hibernate:
         format_sql: true
     database: mysql
-    #database-platform: org.hibernate.dialect.MysqlDilaect -> verificar erro
+  mail:
+    host: ${MAIL_HOST}
+    port: ${MAIL_PORT}
+    username: ${MAIL_ADDRESS}
+    password: ${MAIL_PASSWORD}
+    properties.mail.smtp:
+      auth: true
+      starttls.enable: true
 
 application:
   security:
     jwt:
-      secret-key: 472D4B6150645367556B58703273357638792F423F4528482B4D625165546857
+      secret-key: ${SECRET_KEY}
+  url:
+    base: ${BASE_URL}

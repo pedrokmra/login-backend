@@ -18,7 +18,7 @@ import java.util.List;
 @AllArgsConstructor
 @Entity
 @Table(name = "users")
-public class User implements UserDetails { // pesquisar sobre userDetails e como implementar os métodos corretamente
+public class User implements UserDetails { // pesquisar sobre implementações padrão do userDetails
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -26,10 +26,11 @@ public class User implements UserDetails { // pesquisar sobre userDetails e como
     private String password;
     @Enumerated(EnumType.STRING)
     private Role role;
+    private boolean enabled;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of(new SimpleGrantedAuthority(role.name())); // como criar mais de uma role por usuario
+        return List.of(new SimpleGrantedAuthority(role.name())); // criar mais de uma role por usuario
     }
 
     @Override
@@ -59,6 +60,6 @@ public class User implements UserDetails { // pesquisar sobre userDetails e como
 
     @Override
     public boolean isEnabled() {
-        return true;
+        return enabled;
     }
 }
